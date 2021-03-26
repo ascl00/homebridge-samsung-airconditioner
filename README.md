@@ -1,5 +1,14 @@
 #Homebridge-samsung-airconditioner
 
+Forked from cicciovo's work. The main differences are:
+ - Deals with multiple devices exposed by the wifi controller by searching for the first one that actually has the info we need
+ - Removes cURL and uses native nodejs requests
+ - Uses a single status update call, and protects it to avoid spamming calls
+ - Ensures the app is not held up waiting for updates by caching state
+
+ Big thanks to cicciovo for the intial plugin.
+
+
 Samsung Airconditioenr plugin for [Homebridge]
 
 This allows you to control your Samsung Airconditioner with HomeKit and Siri.
@@ -22,19 +31,9 @@ curl -k -H "Content-Type: application/json" -H "DeviceToken: xxxxxxxxxxx" --cert
 
 	3.5 In the window where are running the file Server8889.py should be appare the TOKEN, copy and past it in your config.json
 
-4. Remember to install "Samsung root certificate" in the System
+NOTE: The above method did not work for me. Using the reset button the controller, making the curl request, and then manually pressing the "AP" button on the controller was what did the trick. It isn't super reliable so you may need to try a few times
 
-	4.1 if you are on the mac double click on the certain
-	
-	4.2 in you are in Raspberry to add the root certificate this:
-	
-		sudo mkdir /usr/share/ca-certificates/local
-		
-		sudo cp /usr/lib/node_modules/homebridge-samsung-airconditioner/ac14k_m.pem /usr/share/ca-certificates/local/
-		
-		sudo update-ca-certificates
-
-5. Update your configuration file. See `config.json`.
+4. Update your configuration file. See `config.json`.
 
 	5.1 Change the ip with the ip of your AC
 
@@ -42,7 +41,5 @@ curl -k -H "Content-Type: application/json" -H "DeviceToken: xxxxxxxxxxx" --cert
 
 	5.3 if necessary change the patchCert
 	
-	5.4 If ypu obtain an error with this string "Power function failed /bin/sh: jq: not found" install jq with the command brew install jq
-	
-6. If you obtain an Nan error see if your AC is connected to the wifi.
+5. If you obtain an Nan error see if your AC is connected to the wifi.
 
