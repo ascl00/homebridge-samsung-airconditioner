@@ -233,7 +233,6 @@ setHeatingTargetTemperature: function(temp, callback) {
         else
         {
             this.log("setHeatingTargetTemperature: " + temp);
-            this.updateState();
         }
     }.bind(this));
     callback();
@@ -252,7 +251,6 @@ setCoolingTargetTemperature: function(temp, callback) {
             this.log("setCoolingTargetTemperature failed: " + error);
         } else {
             this.log("setCoolingTargetTemperature: " + temp);
-            this.updateState();
         }
     }.bind(this));
     callback();
@@ -287,7 +285,6 @@ setActive: function(state, callback) {
             this.log("setActive failed: " + error);
         } else {
             this.log("setActive success: " + temp);
-            this.updateState();
         }
     }.bind(this));
 
@@ -336,7 +333,6 @@ setTargetMode: function(state, callback) {
             this.service.getCharacteristic(Characteristic.TargetHeaterCoolerState).updateValue(error);
         } else {
             this.log("setActive: " + temp);
-            this.updateState();
         }
     }.bind(this));
 }    
